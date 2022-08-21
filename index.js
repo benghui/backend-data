@@ -1,5 +1,5 @@
 import express from "express";
-import { transformAllCoffeeData } from "./etl.js";
+import { transformAllCoffeeData, transformAllBeerData } from "./etl.js";
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -7,13 +7,18 @@ const port = process.env.PORT || 3000;
 app.get('/drinks', async (req, res) => {
 	if (req.query.type === 'coffee') {
 		try {
-			const data = await transformAllCoffeeData()
-			res.send(data)
+			const data = await transformAllCoffeeData();
+			res.send(data);
 		} catch (err) {
 			res.status(400).send(err);
 		}
 	} else if (req.query.type === 'beer') {
-		res.send("beer");
+		try {
+			const data = await transformAllBeerData();
+			res.send(data);
+		} catch (err) {
+			res.status(400).send(err);
+		}
 	} else if (Object.keys(req.query).length === 0) {
 		res.send('coffee beer');
 	} else {

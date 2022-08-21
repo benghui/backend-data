@@ -15,3 +15,14 @@ export const transformCoffeeData = async (coffeeData) => {
 		id: uuid()
 	}
 }
+
+export const transformBeerData = (beerData) => {
+	return {
+		name: beerData.name,
+		price: beerData.price,
+		rating: beerData.rating.average.toFixed(3),
+		// description: somefunction,
+		image: beerData.image,
+		id: uuid()
+	}
+}
