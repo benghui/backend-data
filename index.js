@@ -1,6 +1,9 @@
 import express from "express";
+import dotenv from "dotenv";
 import { transformAllCoffeeData, transformAllBeerData, transformAllData } from "./etl.js";
 import { catchAsyncErrors } from "./catchAsyncMiddleware.js";
+
+dotenv.config({ path: `.env.${process.env.NODE_ENV}` })
 
 const app = express();
 const port = process.env.PORT || 3000;
