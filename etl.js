@@ -5,7 +5,9 @@ export const transformAllCoffeeData = async () => {
 	const rawCoffeeData = await getCoffeeApi();
 
 	return await Promise.all(
-		await rawCoffeeData.map(async (data) => {
+		await rawCoffeeData.filter(async (data) => {
+			return await data.id !== 0
+		}).map(async (data) => {
 			return await transformCoffeeData(data);
 		})
 	)
@@ -14,7 +16,11 @@ export const transformAllCoffeeData = async () => {
 export const transformAllBeerData = async () => {
 	const rawBeerData = await getBeerApi();
 
-	return await rawBeerData.map(data => transformBeerData(data))
+	return await rawBeerData.filter(data => {
+		data.rating.average != null
+	}).map(data => {
+		transformBeerData(data)
+	})
 }
 
 export const transformAllData = async () => {
