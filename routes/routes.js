@@ -1,6 +1,6 @@
 import { transformAllCoffeeData, transformAllBeerData, transformAllData } from "../etl.js";
 import { catchAsyncErrors } from "../catchAsyncMiddleware.js";
-import { queryCafe, queryCafeLocation } from "../repository.js";
+import { queryCafe, queryCafeLocation, queryEmployees } from "../repository.js";
 import express from "express";
 
 const router = express.Router();
@@ -32,6 +32,11 @@ router.get('/cafes', catchAsyncErrors(async (req, res, next) => {
 	} else {
 		res.status(400).send("Server encountered an error with query");
 	}
+}))
+
+router.get('/cafes/employees', catchAsyncErrors(async (req, res, next) => {
+	const data = await queryEmployees();
+	res.send(data);
 }))
 
 export default router

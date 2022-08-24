@@ -19,3 +19,13 @@ export const queryCafe = async () => {
 		return err
 	}
 }
+
+export const queryEmployees = async () => {
+	let query = `SELECT * FROM employees ORDER BY days_worked DESC`;
+	try {
+		const [rows, fields] = await db.query(query)
+		return rows
+	} catch (err) {
+		return err
+	}
+}
