@@ -5,7 +5,7 @@ USE backend_design;
 DROP TABLE IF EXISTS cafes;
 
 CREATE TABLE cafes (
-  id VARCHAR(32) DEFAULT (UUID()) PRIMARY KEY,
+  id VARCHAR(36) DEFAULT (UUID()) PRIMARY KEY,
   name VARCHAR (100) NOT NULL,
   description VARCHAR (200) NOT NULL,
   employees SMALLINT NOT NULL,
@@ -22,11 +22,11 @@ CREATE TABLE employees (
   cafe VARCHAR (100) NOT NULL
 );
 
-INSERT INTO cafes (id, name, description, employees, logo, location) VALUES("e07166a252594723a67b926f7f89a22c", "featherly satisfaction cafe", "A place where you can be satisfied with coffee.", 15, "https://picsum.photos/200", "north");
-INSERT INTO cafes (id, name, description, employees, logo, location) VALUES("2b934d78335f4bfeb12ede4e46f44dd9", "brew ha ha espresso bar", "We are passionate about our coffee and we want to share it with you.", 8, "https://picsum.photos/200", "south");
-INSERT INTO cafes (id, name, description, employees, logo, location) VALUES("b268f8efecd842c9a345743be637e6a7", "javawocky room", "javawocky is where we sell only high quality products made by small businesses around the world.", 12, "https://picsum.photos/200", "east");
-INSERT INTO cafes (id, name, description, employees, logo, location) VALUES("b15595b7714049339f2d0f35bf269f0e", "twinkling question cafe", "the livelyness from within can be felt outside.", 6, "https://picsum.photos/200", "east");
-INSERT INTO cafes (id, name, description, employees, logo, location) VALUES("71c84827f7a143839a378732e92c9606", "yours & mine luncheonette", "From the outside it looks cozy, beautiful and snug.", 7, "https://picsum.photos/200", "west");
+INSERT INTO cafes (id, name, description, employees, logo, location) VALUES("91a744e7-1f92-46db-acc7-1c17e8430d64", "featherly satisfaction cafe", "A place where you can be satisfied with coffee.", 15, "https://picsum.photos/200", "north");
+INSERT INTO cafes (id, name, description, employees, logo, location) VALUES("9c3465ed-a89d-46af-9dea-948ac2419cfb", "brew ha ha espresso bar", "We are passionate about our coffee and we want to share it with you.", 8, "https://picsum.photos/200", "south");
+INSERT INTO cafes (id, name, description, employees, logo, location) VALUES("b921af00-e304-4bff-8201-340dae516b62", "javawocky room", "javawocky is where we sell only high quality products made by small businesses around the world.", 12, "https://picsum.photos/200", "east");
+INSERT INTO cafes (id, name, description, employees, logo, location) VALUES("6a16a399-13f1-48af-9ef8-8aa86276f2df", "twinkling question cafe", "the livelyness from within can be felt outside.", 6, "https://picsum.photos/200", "east");
+INSERT INTO cafes (id, name, description, employees, logo, location) VALUES("cf60fa8d-e10d-42d8-ac7e-102f47833dd3", "yours & mine luncheonette", "From the outside it looks cozy, beautiful and snug.", 7, "https://picsum.photos/200", "west");
 
 INSERT INTO employees (id, name, days_worked, cafe) VALUES("UI216b5d1", "Tata", 23, "featherly satisfaction cafe");
 INSERT INTO employees (id, name, days_worked, cafe) VALUES("UIf8efecd", "Young", 56, "twinkling question cafe");
