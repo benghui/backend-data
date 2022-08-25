@@ -21,7 +21,7 @@ export const transformBeerData = (beerData) => {
 		name: beerData.name,
 		price: beerData.price,
 		rating: beerData.rating.average.toFixed(3),
-		// description: somefunction,
+		description: "empty",
 		image: beerData.image,
 		id: uuid()
 	}

@@ -1,5 +1,6 @@
 import { getCoffeeApi, getBeerApi } from "./fetchData.js";
 import { transformCoffeeData, transformBeerData } from "./transformData.js";
+import { beerDescription } from "./description.js";
 
 export const transformAllCoffeeData = async () => {
 	const rawCoffeeData = await getCoffeeApi();
@@ -20,6 +21,13 @@ export const transformAllBeerData = async () => {
 		return (typeof (data.id) === 'number')
 	}).map((data) => {
 		return transformBeerData(data)
+	}).map((data) => {
+		for (let key in beerDescription) {
+			if (data.name.includes(key)) {
+				data.description = beerDescription[key]
+			}
+		}
+		return data;
 	})
 }
 
