@@ -1,4 +1,4 @@
-import { dbConn as db } from './config/db.config.js';
+import { dbConn as db } from '../config/db.config.js';
 
 export const queryCafeLocation = async (location) => {
 	let query = `SELECT * FROM cafes WHERE location = ? ORDER BY employees DESC`;

@@ -1,8 +1,8 @@
 import { transformAllCoffeeData, transformAllBeerData, transformAllData } from "../pipeline/etl.js";
 import { validate } from "../middleware/validateMiddleware.js";
-import { cafeValidation, employeeValidation } from "../validation.js";
+import { cafeValidation, employeeValidation } from "../utils/validation.js";
 import { catchAsyncErrors } from "../middleware/catchAsyncMiddleware.js";
-import { createNewCafe, createNewEmployee, queryCafe, queryCafeLocation, queryEmployees, queryOneEmployee } from "../repository.js";
+import { createNewCafe, createNewEmployee, queryCafe, queryCafeLocation, queryEmployees, queryOneEmployee } from "../utils/repository.js";
 import express from "express";
 
 const router = express.Router();
