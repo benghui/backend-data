@@ -1,6 +1,8 @@
 import { transformAllCoffeeData, transformAllBeerData, transformAllData } from "../pipeline/etl.js";
-import { catchAsyncErrors } from "../catchAsyncMiddleware.js";
-import { queryCafe, queryCafeLocation, queryEmployees } from "../repository.js";
+import { validate } from "../middleware/validateMiddleware.js";
+import { cafeValidation } from "../validation.js";
+import { catchAsyncErrors } from "../middleware/catchAsyncMiddleware.js";
+import { createNewCafe, queryCafe, queryCafeLocation, queryEmployees } from "../repository.js";
 import express from "express";
 
 const router = express.Router();
@@ -37,6 +39,15 @@ router.get('/cafes', catchAsyncErrors(async (req, res, next) => {
 router.get('/cafes/employees', catchAsyncErrors(async (req, res, next) => {
 	const data = await queryEmployees();
 	res.send(data);
+}))
+
+router.post('/cafe', validate(cafeValidation), catchAsyncErrors(async (req, res, next) => {
+	const data = await createNewCafe(req.body)
+	if (data.affectedRows === 1) {
+		res.status(201).send()
+	} else {
+		res.status(400).send("Server encountered an error");
+	}
 }))
 
 export default router
