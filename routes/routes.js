@@ -1,8 +1,8 @@
 import { transformAllCoffeeData, transformAllBeerData, transformAllData } from "../pipeline/etl.js";
 import { validate } from "../middleware/validateMiddleware.js";
-import { cafeValidation } from "../validation.js";
+import { cafeValidation, employeeValidation } from "../validation.js";
 import { catchAsyncErrors } from "../middleware/catchAsyncMiddleware.js";
-import { createNewCafe, queryCafe, queryCafeLocation, queryEmployees } from "../repository.js";
+import { createNewCafe, createNewEmployee, queryCafe, queryCafeLocation, queryEmployees, queryOneEmployee } from "../repository.js";
 import express from "express";
 
 const router = express.Router();
@@ -43,11 +43,30 @@ router.get('/cafes/employees', catchAsyncErrors(async (req, res, next) => {
 
 router.post('/cafe', validate(cafeValidation), catchAsyncErrors(async (req, res, next) => {
 	const data = await createNewCafe(req.body)
+
 	if (data.affectedRows === 1) {
-		res.status(201).send()
+		res.status(201).send();
 	} else {
 		res.status(400).send("Server encountered an error");
 	}
 }))
 
-export default router
+router.post('/cafe/employee', validate(employeeValidation), catchAsyncErrors(async (req, res, next) => {
+	let id = req.body.id;
+
+	const exist = await queryOneEmployee(id);
+
+	if (exist.length === 0) {
+		const data = await createNewEmployee(req.body)
+		if (data.affectedRows === 1) {
+			res.status(201).send();
+		} else {
+			res.status(400).send("Server encountered an error");
+		}
+	} else {
+		res.status(400).send("Cannot create duplicate");
+	}
+
+}))
+
+export default router;
